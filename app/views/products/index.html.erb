@@ -1,0 +1,25 @@
+<h1>Product List</h1><br>
+
+<%= link_to 'Create New Product', new_product_path, remote: true %> <br>
+<%= link_to 'Import CSV', 'javascript:void(0)', data: {toggle: "modal", target: "#csvModal" } %> <br><br>
+
+<!-- Search -->
+<%= form_with url: search_path, remote: true, method: :get do |f| %>
+  <%= f.text_field :search, class: "search" %>
+  <i class="fa fa-times fa-lg search-data"></i>
+
+  <%= f.submit 'Search' , class: 'btn btn-success ml-2' %>
+<% end %>
+<br><br>
+
+<!-- Listing -->
+<div id="product_listing">
+  <%= render partial: 'listing', locals: { products: @products } %>
+</div>
+
+<div id='createEditProduct'></div>
+<%= render 'import_csv_modal' %>
+
+<script>
+  searchData()
+</script>

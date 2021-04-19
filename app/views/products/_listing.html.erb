@@ -1,0 +1,37 @@
+
+<% if products.present? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.each do |product| %>
+        <tr>
+          <th scope="row">pro-<%= product.id %></th>
+          <td><%= product.name %></td>
+          <td><%= product.price %></td>
+          <td><%= product.description %></td>
+          <td>
+            <%= link_to product_path(product) do  %>
+              <i class="fa fa-eye"></i>
+            <% end %>
+            <%= link_to edit_product_path(product), remote: true do %>
+              <i class="fa fa-pencil"></i>
+            <% end %>
+            <%= link_to product_path(product), method: :delete, remote: true  do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  No product yet!!!
+<% end %>
